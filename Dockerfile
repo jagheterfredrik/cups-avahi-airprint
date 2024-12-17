@@ -8,7 +8,7 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	cups-client \
 	cups-filters \
 	cups-dev \
-        epson-inkjet-printer-escpr \
+	epson-inkjet-printer-escpr \
 	gutenprint \
 	gutenprint-libs \
 	gutenprint-doc \
