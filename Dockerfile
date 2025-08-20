@@ -8,6 +8,7 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	cups-client \
 	cups-filters \
 	cups-dev \
+        epson-inkjet-printer-escpr \
 	ghostscript \
 	hplip \
 	avahi \
@@ -20,16 +21,6 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	py3-pycups \
 	perl \
 	&& rm -rf /var/cache/apk/*
-
-# Build and install brlaser from source
-RUN apk add --no-cache git cmake && \
-    git clone https://github.com/pdewacht/brlaser.git && \
-    cd brlaser && \
-    cmake . && \
-    make && \
-    make install && \
-    cd .. && \
-    rm -rf brlaser
 
 # Build and install gutenprint from source
 RUN wget -O gutenprint-5.3.5.tar.xz https://sourceforge.net/projects/gimp-print/files/gutenprint-5.3/5.3.5/gutenprint-5.3.5.tar.xz/download && \
@@ -58,6 +49,8 @@ RUN chmod +x /root/*
 
 #Run Script
 CMD ["/root/run_cups.sh"]
+
+RUN addgroup root lpadmin
 
 # Baked-in config file changes
 RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && \
